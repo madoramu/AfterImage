@@ -41,8 +41,6 @@ namespace UnityChan
 		private Vector3 orgVectColCenter;
 		private Animator anim;							// キャラにアタッチされるアニメーターへの参照
 		private AnimatorStateInfo currentBaseState;			// base layerで使われる、アニメーターの現在の状態の参照
-
-		private GameObject cameraObject;	// メインカメラへの参照
 		
 		// アニメーター各ステートへの参照
 		static int idleState = Animator.StringToHash ("Base Layer.Idle");
@@ -58,8 +56,6 @@ namespace UnityChan
 			// CapsuleColliderコンポーネントを取得する（カプセル型コリジョン）
 			col = GetComponent<CapsuleCollider> ();
 			rb = GetComponent<Rigidbody> ();
-			//メインカメラを取得する
-			cameraObject = GameObject.FindWithTag ("MainCamera");
 			// CapsuleColliderコンポーネントのHeight、Centerの初期値を保存する
 			orgColHight = col.height;
 			orgVectColCenter = col.center;
@@ -93,7 +89,7 @@ namespace UnityChan
 			if (Input.GetButtonDown ("Jump")) {	// スペースキーを入力したら
 
 				//アニメーションのステートがLocomotionの最中のみジャンプできる
-				if (currentBaseState.nameHash == locoState) {
+				if (currentBaseState.fullPathHash == locoState) {
 					//ステート遷移中でなかったらジャンプできる
 					if (!anim.IsInTransition (0)) {
 						rb.AddForce (Vector3.up * jumpPower, ForceMode.VelocityChange);
@@ -113,7 +109,7 @@ namespace UnityChan
 			// 以下、Animatorの各ステート中での処理
 			// Locomotion中
 			// 現在のベースレイヤーがlocoStateの時
-			if (currentBaseState.nameHash == locoState) {
+			if (currentBaseState.fullPathHash == locoState) {
 				//カーブでコライダ調整をしている時は、念のためにリセットする
 				if (useCurves) {
 					resetCollider ();
@@ -121,8 +117,7 @@ namespace UnityChan
 			}
 		// JUMP中の処理
 		// 現在のベースレイヤーがjumpStateの時
-		else if (currentBaseState.nameHash == jumpState) {
-				cameraObject.SendMessage ("setCameraPositionJumpView");	// ジャンプ中のカメラに変更
+		else if (currentBaseState.fullPathHash == jumpState) {
 				// ステートがトランジション中でない場合
 				if (!anim.IsInTransition (0)) {
 				
@@ -157,7 +152,7 @@ namespace UnityChan
 			}
 		// IDLE中の処理
 		// 現在のベースレイヤーがidleStateの時
-		else if (currentBaseState.nameHash == idleState) {
+		else if (currentBaseState.fullPathHash == idleState) {
 				//カーブでコライダ調整をしている時は、念のためにリセットする
 				if (useCurves) {
 					resetCollider ();
@@ -169,8 +164,7 @@ namespace UnityChan
 			}
 		// REST中の処理
 		// 現在のベースレイヤーがrestStateの時
-		else if (currentBaseState.nameHash == restState) {
-				//cameraObject.SendMessage("setCameraPositionFrontView");		// カメラを正面に切り替える
+		else if (currentBaseState.fullPathHash == restState) {
 				// ステートが遷移中でない場合、Rest bool値をリセットする（ループしないようにする）
 				if (!anim.IsInTransition (0)) {
 					anim.SetBool ("Rest", false);
