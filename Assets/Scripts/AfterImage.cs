@@ -14,8 +14,23 @@ public class AfterImage : MonoBehaviour
 
     private int _baseColorID = -1;
 
+    public bool isInitialized { get; private set; } = false;
+
     private void Awake()
     {
+        Initialize();
+    }
+
+    /// <summary>
+    /// 初期化処理
+    /// </summary>
+    public void Initialize()
+    {
+        if (isInitialized)
+        {
+            return;
+        }
+
         if (_meshRenderer == null)
         {
             throw new Exception("Mesh Renderer null");
@@ -29,6 +44,8 @@ public class AfterImage : MonoBehaviour
         // マテリアルを設定して初期化
         _meshRenderer.material = _material;
         UpdateColor();
+
+        isInitialized = true;
     }
 
     private void Update()
