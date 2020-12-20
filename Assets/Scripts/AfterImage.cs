@@ -21,10 +21,12 @@ public class AfterImage : MonoBehaviour
             throw new Exception("Mesh Renderer null");
         }
 
-        // シェーダーを元にマテリアルを作成
+        // IDと進行値を設定
+        _rate = 0f;
         _baseColorID = Shader.PropertyToID("_BaseColor");
+        // シェーダーを元にマテリアルを作成
         _material = new Material(_shader);
-
+        // マテリアルを設定して初期化
         _meshRenderer.material = _material;
         UpdateColor();
     }
