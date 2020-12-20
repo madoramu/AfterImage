@@ -828,6 +828,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3409251881762098162, guid: 1697431e1371bef4286b4706892858c6,
+        type: 3}
+      propertyPath: _shader
+      value: 
+      objectReference: {fileID: -6465566751694194690, guid: 8eb71ff94100f79498044b9e1f54ed70,
+        type: 3}
     - target: {fileID: 7725961557646127028, guid: 1697431e1371bef4286b4706892858c6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -887,6 +893,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AfterImageAxe
+      objectReference: {fileID: 0}
+    - target: {fileID: 7725961557648514428, guid: 1697431e1371bef4286b4706892858c6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1697431e1371bef4286b4706892858c6, type: 3}
