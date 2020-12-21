@@ -7,10 +7,12 @@ using UniRx.Toolkit;
 public class AfterImagePool : ObjectPool<AfterImage>
 {
     private AfterImage _gameObject = null;
+    private Transform _parent = null;
 
-    public AfterImagePool(AfterImage gameObject)
+    public AfterImagePool(AfterImage gameObject, Transform parent)
     {
         SetPoolObject(gameObject);
+        SetParent(parent);
     }
 
     ~AfterImagePool()
@@ -25,8 +27,13 @@ public class AfterImagePool : ObjectPool<AfterImage>
             Debug.LogError("生成元のGameObjectがnullです");
             return null;
         }
+        if (_parent == null)
+        {
+            Debug.LogError("親Transformがnullです");
+            return null;
+        }
 
-        AfterImage afterImage = GameObject.Instantiate<AfterImage>(_gameObject);
+        AfterImage afterImage = GameObject.Instantiate<AfterImage>(_gameObject, _parent, true);
         afterImage.Initialize();
         return afterImage;
     }
@@ -37,5 +44,13 @@ public class AfterImagePool : ObjectPool<AfterImage>
     public void SetPoolObject(AfterImage gameObject)
     {
         _gameObject = gameObject;
+    }
+
+    /// <summary>
+    /// 生成オブジェクトの親オブジェクトの設定
+    /// </summary>
+    public void SetParent(Transform parent)
+    {
+        _parent = parent;
     }
 }

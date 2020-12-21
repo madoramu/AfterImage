@@ -11,8 +11,10 @@ using Cysharp.Threading.Tasks;
 [RequireComponent(typeof(ObservableDestroyTrigger))]
 public class AfterImageController : MonoBehaviour
 {
-    [SerializeField] private AfterImage afterImage = null;
-    [SerializeField] private int _preLoadCount = 5;
+    [SerializeField, Header("残像の発生元となるオブジェクト")] private Transform _originalTransform = null;
+    [SerializeField, Header("発生させる残像オブジェクト")] private AfterImage _afterImage = null;
+    [SerializeField, Header("残像の親オブジェクト")] private Transform _afterImageParent = null;
+    [SerializeField, Header("事前生成数")] private int _preLoadCount = 5;
     [SerializeField, Header("残像の生成間隔")] private float _createIntervalTime = 0.1f;
     [SerializeField, Header("残像の生存時間")] private float _afterImageLifeTime = 0.2f;
     [SerializeField, Header("残像を生成するか")] private BoolReactiveProperty _isCreate = new BoolReactiveProperty(false);
@@ -26,7 +28,7 @@ public class AfterImageController : MonoBehaviour
     private void Awake()
     {
         // プールの準備
-        _pool = new AfterImagePool(afterImage);
+        _pool = new AfterImagePool(_afterImage, _afterImageParent);
         _pool.PreloadAsync(_preLoadCount, 1)
             .TakeUntilDestroy(this)
             .Subscribe(null, exception => { Debug.LogException(exception); }, () => { isInitialized = true; });
@@ -46,7 +48,24 @@ public class AfterImageController : MonoBehaviour
                 Observable.Interval(TimeSpan.FromSeconds(_createIntervalTime))
                         .Subscribe(_ =>
                         {
+                            // プールから残像を取得してオリジナルのポーズと合わせる
                             AfterImage image = _pool.Rent();
+                            image.Setup(_originalTransform);
+
+                            // 時間経過処理と終了時にプールに戻す処理を登録しておく
+                            float currentTime = 0f;
+                            this.UpdateAsObservable()
+                                .TakeUntilDisable(image)
+                                .Subscribe(unit =>
+                                {
+                                    currentTime += Time.deltaTime;
+                                    image.rate = Mathf.Lerp(0f, _afterImageLifeTime, currentTime);
+                                    if (currentTime >= _afterImageLifeTime)
+                                    {
+                                        _pool.Return(image);
+                                    }
+                                },
+                                () => { Debug.Log("正常に破棄されています"); });
                         })
                         .AddTo(_disposable);
             });

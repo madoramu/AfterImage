@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 486550}
+  - component: {fileID: 187349117}
+  - component: {fileID: 187349116}
   m_Layer: 0
   m_Name: axe
   m_TagString: Untagged
@@ -31,6 +33,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &187349117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb219b23cdf4b314f94a27bca3cc8012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &187349116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edcfa2ac23130d64892f1de10f2b5031, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _originalTransform: {fileID: 486550}
+  _afterImage: {fileID: 3409251881762098162, guid: 1697431e1371bef4286b4706892858c6,
+    type: 3}
+  _afterImageParent: {fileID: 0}
+  _preLoadCount: 5
+  _createIntervalTime: 0.1
+  _afterImageLifeTime: 0.2
+  _isCreate:
+    value: 0
 --- !u!1 &197290
 GameObject:
   m_ObjectHideFlags: 0

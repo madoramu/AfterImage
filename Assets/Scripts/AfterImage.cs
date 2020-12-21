@@ -65,4 +65,16 @@ public class AfterImage : MonoBehaviour
         
         isInitialized = true;
     }
+
+    /// <summary>
+    /// 残像の開始時の設定処理
+    /// </summary>
+    public void Setup(Transform baseTransform)
+    {
+        transform.position = baseTransform.position;
+        transform.rotation = baseTransform.rotation;
+        transform.localScale = baseTransform.localScale;
+
+        rate = 0f;
+    }
 }
