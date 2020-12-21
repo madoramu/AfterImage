@@ -31,7 +31,7 @@ public class AfterImageController : MonoBehaviour
         _pool = new AfterImagePool(_afterImage, _afterImageParent);
         _pool.PreloadAsync(_preLoadCount, 1)
             .TakeUntilDestroy(this)
-            .Subscribe(null, exception => { Debug.LogException(exception); }, () => { isInitialized = true; });
+            .Subscribe(_=> { }, exception => { Debug.LogException(exception); }, () => { isInitialized = true; });
 
         // フラグに応じて処理の登録と破棄を行う
         _isCreate
