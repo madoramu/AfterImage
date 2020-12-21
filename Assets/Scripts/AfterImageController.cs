@@ -8,7 +8,7 @@ using Cysharp.Threading.Tasks;
 /// <summary>
 /// 残像の操作用コンポーネント
 /// </summary>
-[RequireComponent(typeof(ObservableDestroyTrigger))]
+[RequireComponent(typeof(ObservableUpdateTrigger), typeof(ObservableDestroyTrigger))]
 public class AfterImageController : MonoBehaviour
 {
     [SerializeField, Header("残像の発生元となるオブジェクト")] private Transform _originalTransform = null;
@@ -22,11 +22,17 @@ public class AfterImageController : MonoBehaviour
     private AfterImagePool _pool = null;
     private CompositeDisposable _disposable = new CompositeDisposable();
 
+    // 最適化用
+    private ObservableUpdateTrigger _updateTrigger = null;
+
     public bool isCreate { get => _isCreate.Value; set => _isCreate.Value = value; }
     public bool isInitialized { get; private set; } = false;
 
     private void Awake()
     {
+        // Updateの発行元をキャッシュしておく
+        _updateTrigger = GetComponent<ObservableUpdateTrigger>();
+
         // プールの準備
         _pool = new AfterImagePool(_afterImage, _afterImageParent);
         _pool.PreloadAsync(_preLoadCount, 1)
@@ -54,7 +60,7 @@ public class AfterImageController : MonoBehaviour
 
                             // 時間経過処理と終了時にプールに戻す処理を登録しておく
                             float currentTime = 0f;
-                            this.UpdateAsObservable()
+                            _updateTrigger.UpdateAsObservable()
                                 .TakeUntilDisable(image)
                                 .Subscribe(unit =>
                                 {
