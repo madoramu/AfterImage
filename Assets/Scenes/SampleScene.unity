@@ -180,29 +180,20 @@ PrefabInstance:
       propertyPath: _afterImageParent
       value: 
       objectReference: {fileID: 693621269}
+    - target: {fileID: 187349116, guid: a6f75ae2198bd1e47b95c317412b3ef3, type: 3}
+      propertyPath: _preLoadCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 187349116, guid: a6f75ae2198bd1e47b95c317412b3ef3, type: 3}
+      propertyPath: _afterImageLifeTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 187349120, guid: a6f75ae2198bd1e47b95c317412b3ef3, type: 3}
+      propertyPath: _eulers.z
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6f75ae2198bd1e47b95c317412b3ef3, type: 3}
---- !u!1 &187349115 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 103692, guid: a6f75ae2198bd1e47b95c317412b3ef3,
-    type: 3}
-  m_PrefabInstance: {fileID: 187349114}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &187349120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 187349115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68b91be457b55f54fa44b50c22a8ec88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _length: 10
-  _pingPongSpeed: 10
-  _eulers: {x: 0, y: 0, z: 20}
 --- !u!1 &198691230
 GameObject:
   m_ObjectHideFlags: 0

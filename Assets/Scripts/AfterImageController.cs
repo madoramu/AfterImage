@@ -65,7 +65,7 @@ public class AfterImageController : MonoBehaviour
                                 .Subscribe(unit =>
                                 {
                                     currentTime += Time.deltaTime;
-                                    image.rate = Mathf.Lerp(0f, _afterImageLifeTime, currentTime);
+                                    image.rate = currentTime / _afterImageLifeTime;
                                     if (currentTime >= _afterImageLifeTime)
                                     {
                                         _pool.Return(image);

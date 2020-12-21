@@ -75,9 +75,9 @@ MonoBehaviour:
   _afterImage: {fileID: 3409251881762098162, guid: 1697431e1371bef4286b4706892858c6,
     type: 3}
   _afterImageParent: {fileID: 0}
-  _preLoadCount: 5
+  _preLoadCount: 10
   _createIntervalTime: 0.1
-  _afterImageLifeTime: 0.2
+  _afterImageLifeTime: 0.5
   _isCreate:
     value: 0
 --- !u!114 &187349120
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _length: 10
   _pingPongSpeed: 10
-  _eulers: {x: 0, y: 0, z: 20}
+  _eulers: {x: 0, y: 0, z: 40}
 --- !u!1 &197290
 GameObject:
   m_ObjectHideFlags: 0
