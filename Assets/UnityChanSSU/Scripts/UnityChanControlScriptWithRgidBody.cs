@@ -15,6 +15,7 @@ namespace UnityChan
 
 	public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 	{
+		[SerializeField] private bool _showGUI = true;
 
 		public float animSpeed = 1.5f;				// アニメーション再生速度設定
 		public float lookSmoother = 3.0f;			// a smoothing setting for camera motion
@@ -174,6 +175,11 @@ namespace UnityChan
 
 		void OnGUI ()
 		{
+            if (!_showGUI)
+            {
+				return;
+            }
+
 			GUI.Box (new Rect (Screen.width - 260, 10, 250, 150), "Interaction");
 			GUI.Label (new Rect (Screen.width - 245, 30, 250, 30), "Up/Down Arrow : Go Forwald/Go Back");
 			GUI.Label (new Rect (Screen.width - 245, 50, 250, 30), "Left/Right Arrow : Turn Left/Turn Right");
