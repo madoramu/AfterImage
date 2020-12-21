@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5049258191680549342}
   - component: {fileID: 187349117}
   - component: {fileID: 187349116}
+  - component: {fileID: 187349120}
   m_Layer: 0
   m_Name: axe
   m_TagString: Untagged
@@ -79,6 +80,21 @@ MonoBehaviour:
   _afterImageLifeTime: 0.2
   _isCreate:
     value: 0
+--- !u!114 &187349120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68b91be457b55f54fa44b50c22a8ec88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _length: 10
+  _pingPongSpeed: 10
+  _eulers: {x: 0, y: 0, z: 20}
 --- !u!1 &197290
 GameObject:
   m_ObjectHideFlags: 0
