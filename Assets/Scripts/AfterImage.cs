@@ -52,17 +52,16 @@ public class AfterImage : MonoBehaviour
             throw new Exception("Mesh Renderer null");
         }
 
-        // Rateに変化があったらColorを設定するように登録
-        _rate.Subscribe(value => _material.SetColor(_baseColorID, _gradient.Evaluate(value)));
-        rate = 0f;
         // ID取得
         _baseColorID = Shader.PropertyToID("_BaseColor");
         // シェーダーを元にマテリアルを作成
         _material = new Material(_shader);
         // マテリアルを設定して初期化
         _meshRenderer.material = _material;
+        // Rateに変化があったらColorを設定するように登録
+        _rate.Subscribe(value => _material.SetColor(_baseColorID, _gradient.Evaluate(value)));
+        rate = 0f;
 
-        
         isInitialized = true;
     }
 
