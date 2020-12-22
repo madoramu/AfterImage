@@ -8,6 +8,7 @@ SampleSceneを開いて、シーンを再生する
 ![ss0](https://user-images.githubusercontent.com/19218953/102889422-f8d20600-449d-11eb-88c5-64e3bf788742.PNG)
 
 Hierarchyウィンドウの「UnityChanSSU」か「Axe」を選択して、Inspectorウィンドウ上の「isCreate」にチェックを入れると残像が生成されます。各パラメーターで生成数・生成間隔などを調整できます
+
 ![ss1](https://user-images.githubusercontent.com/19218953/102889423-fa033300-449d-11eb-862e-0faa7b7b778a.PNG)
 
 
