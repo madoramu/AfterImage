@@ -9,8 +9,10 @@ public interface IAfterImageSetupParam { }
 /// <summary>
 /// 通常の残像
 /// </summary>
+[System.Serializable]
 public class SimpleAfterImageParam : IAfterImageSetupParam
 {
+    public SimpleAfterImageParam(){}
     public SimpleAfterImageParam(Transform original)
     {
         transform = original;
@@ -25,8 +27,10 @@ public class SimpleAfterImageParam : IAfterImageSetupParam
 /// <summary>
 /// 複数のボーンを使用する場合
 /// </summary>
+[System.Serializable]
 public class AfterImageSkinnedMeshParam : IAfterImageSetupParam
 {
+    public AfterImageSkinnedMeshParam() { }
     public AfterImageSkinnedMeshParam(List<Transform> original)
     {
         transforms = original;

@@ -71,7 +71,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edcfa2ac23130d64892f1de10f2b5031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _originalTransform: {fileID: 486550}
   _afterImage: {fileID: 3409251881762098162, guid: 1697431e1371bef4286b4706892858c6,
     type: 3}
   _afterImageParent: {fileID: 0}
@@ -80,6 +79,13 @@ MonoBehaviour:
   _afterImageLifeTime: 0.5
   _isCreate:
     value: 0
+  _param:
+    id: 0
+  _originalTransform: {fileID: 486550}
+  references:
+    version: 1
+    00000000:
+      type: {class: , ns: , asm: }
 --- !u!114 &187349120
 MonoBehaviour:
   m_ObjectHideFlags: 0
