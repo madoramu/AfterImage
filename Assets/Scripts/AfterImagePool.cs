@@ -4,12 +4,12 @@ using UniRx.Toolkit;
 /// <summary>
 /// 残像オブジェクトのプーリングクラス
 /// </summary>
-public class AfterImagePool : ObjectPool<AfterImage>
+public class AfterImagePool : ObjectPool<AfterImageBase>
 {
-    private AfterImage _gameObject = null;
+    private AfterImageBase _gameObject = null;
     private Transform _parent = null;
 
-    public AfterImagePool(AfterImage gameObject, Transform parent)
+    public AfterImagePool(AfterImageBase gameObject, Transform parent)
     {
         SetPoolObject(gameObject);
         SetParent(parent);
@@ -20,7 +20,7 @@ public class AfterImagePool : ObjectPool<AfterImage>
         Clear();
     }
 
-    protected override AfterImage CreateInstance()
+    protected override AfterImageBase CreateInstance()
     {
         if (_gameObject == null)
         {
@@ -33,7 +33,7 @@ public class AfterImagePool : ObjectPool<AfterImage>
             return null;
         }
 
-        AfterImage afterImage = GameObject.Instantiate<AfterImage>(_gameObject, _parent, true);
+        AfterImageBase afterImage = GameObject.Instantiate<AfterImageBase>(_gameObject, _parent, true);
         afterImage.Initialize();
         return afterImage;
     }
@@ -41,7 +41,7 @@ public class AfterImagePool : ObjectPool<AfterImage>
     /// <summary>
     /// 生成オブジェクトの設定
     /// </summary>
-    public void SetPoolObject(AfterImage gameObject)
+    public void SetPoolObject(AfterImageBase gameObject)
     {
         _gameObject = gameObject;
     }

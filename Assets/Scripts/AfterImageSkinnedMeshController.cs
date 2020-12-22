@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading;
+using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
@@ -7,19 +7,21 @@ using Cysharp.Threading.Tasks;
 
 /// <summary>
 /// 残像の操作用コンポーネント
+/// ボーン付きアニメーション対応バージョン
 /// </summary>
 [RequireComponent(typeof(ObservableUpdateTrigger), typeof(ObservableDestroyTrigger))]
-public class AfterImageController : MonoBehaviour
+public class AfterImageSkinnedMeshController : MonoBehaviour
 {
-    [SerializeField, Header("残像の発生元となるオブジェクト")] private Transform _originalTransform = null;
+    [SerializeField, Header("発生元となるオブジェクトのボーン親オブジェクト")] private GameObject _boneParent = null;
     [SerializeField, Header("発生させる残像オブジェクト")] private SimpleAfterImage _afterImage = null;
     [SerializeField, Header("残像の親オブジェクト")] private Transform _afterImageParent = null;
     [SerializeField, Header("事前生成数")] private int _preLoadCount = 5;
     [SerializeField, Header("残像の生成間隔")] private float _createIntervalTime = 0.1f;
     [SerializeField, Header("残像の生存時間")] private float _afterImageLifeTime = 0.2f;
     [SerializeField, Header("残像を生成するか")] private BoolReactiveProperty _isCreate = new BoolReactiveProperty(false);
+    [SerializeField, ReadOnly] private List<Transform> _bones = new List<Transform>();
 
-    private SimpleAfterImageParam _param = null;
+    private AfterImageSkinnedMeshParam _param = null;
     private AfterImagePool _pool = null;
     private CompositeDisposable _disposable = new CompositeDisposable();
 
@@ -29,10 +31,24 @@ public class AfterImageController : MonoBehaviour
     public bool isCreate { get => _isCreate.Value; set => _isCreate.Value = value; }
     public bool isInitialized { get; private set; } = false;
 
+    [ContextMenu("SetBones")]
+    private void SetBones()
+    {
+        _bones.Clear();
+        foreach (var bone in _boneParent.GetComponentsInChildren<Transform>())
+        {
+            _bones.Add(bone);
+        }
+    }
+
     private void Awake()
     {
         // パラメーター生成
-        _param = new SimpleAfterImageParam(_originalTransform);
+        if (_bones.Count <= 0)
+        {
+            SetBones();
+        }
+        _param = new AfterImageSkinnedMeshParam(_bones);
 
         // Updateの発行元をキャッシュしておく
         _updateTrigger = GetComponent<ObservableUpdateTrigger>();
@@ -41,7 +57,7 @@ public class AfterImageController : MonoBehaviour
         _pool = new AfterImagePool(_afterImage, _afterImageParent);
         _pool.PreloadAsync(_preLoadCount, 1)
             .TakeUntilDestroy(this)
-            .Subscribe(_=> { }, exception => { Debug.LogException(exception); }, () => { isInitialized = true; });
+            .Subscribe(_ => { }, exception => { Debug.LogException(exception); }, () => { isInitialized = true; });
 
         // フラグに応じて処理の登録と破棄を行う
         _isCreate
@@ -59,7 +75,7 @@ public class AfterImageController : MonoBehaviour
                         .Subscribe(_ =>
                         {
                             // プールから残像を取得してオリジナルのポーズと合わせる
-                            SimpleAfterImage image = _pool.Rent() as SimpleAfterImage;
+                            AfterImageSkinnedMesh image = _pool.Rent() as AfterImageSkinnedMesh;
                             image.Setup(_param);
 
                             // 時間経過処理と終了時にプールに戻す処理を登録しておく
