@@ -1,7 +1,7 @@
 # AfterImage
 Unity上で3Dモデルの残像処理を行うサンプルプロジェクト
 
-https://user-images.githubusercontent.com/19218953/102885893-76464800-4497-11eb-9d66-87955fa50c29.mp4
+![SampleMovie](https://user-images.githubusercontent.com/19218953/102885893-76464800-4497-11eb-9d66-87955fa50c29.mp4)
 
 ## 開発・動作テスト環境
 * Windows10
