@@ -185,8 +185,7 @@ namespace UnityChan
 			GUI.Label (new Rect (Screen.width - 245, 50, 250, 30), "Left/Right Arrow : Turn Left/Turn Right");
 			GUI.Label (new Rect (Screen.width - 245, 70, 250, 30), "Hit Space key while Running : Jump");
 			GUI.Label (new Rect (Screen.width - 245, 90, 250, 30), "Hit Spase key while Stopping : Rest");
-			GUI.Label (new Rect (Screen.width - 245, 110, 250, 30), "Left Control : Front Camera");
-			GUI.Label (new Rect (Screen.width - 245, 130, 250, 30), "Alt : LookAt Camera");
+			GUI.Label (new Rect (Screen.width - 245, 110, 250, 30), "MouseCursol : Camera Rotate");
 		}
 
 
