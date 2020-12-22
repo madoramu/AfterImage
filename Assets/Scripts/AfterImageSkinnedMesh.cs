@@ -88,7 +88,7 @@ public class AfterImageSkinnedMesh : AfterImageBase
         }
         else
         {
-            Debug.LogError("引数がUseBonesAfterImageParamにキャスト出来ませんでした");
+            Debug.LogError("引数がAfterImageSkinnedMeshParamにキャスト出来ませんでした");
         }
 
         rate = 0f;
